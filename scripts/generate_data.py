@@ -7,7 +7,7 @@ fake = Faker()
 
 data = []
 
-for i in range(5000):  # you can increase later (e.g., 100k)
+for i in range(20000):  # can be increased later
     eta = random.randint(1, 10)
     delay = random.randint(-2, 5)
     
@@ -24,6 +24,11 @@ for i in range(5000):  # you can increase later (e.g., 100k)
     data.append(record)
 
 df = pd.DataFrame(data)
+
+# Shuffle data BEFORE saving
+df = df.sample(frac=1).reset_index(drop=True)
+
+# Save dataset
 df.to_csv("data/logistics_data.csv", index=False)
 
 print("Dataset generated successfully!")
